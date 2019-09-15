@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 
 /**
- * @author wq105907
+ * @author wq
  * @date 2019/6/20
  */
 public class FileChannel {

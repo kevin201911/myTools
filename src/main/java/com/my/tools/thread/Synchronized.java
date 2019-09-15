@@ -1,7 +1,7 @@
 package com.my.tools.thread;
 
 /**
- * @author wq105907
+ * @author wq
  * @date 2019/7/14
  */
 public class Synchronized {

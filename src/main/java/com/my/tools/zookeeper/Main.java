@@ -8,7 +8,7 @@ import org.apache.zookeeper.ZooKeeper;
 
 
 /**
- * @author wq105907
+ * @author wq
  * @date 2019/9/8
  */
 public class Main implements Watcher {

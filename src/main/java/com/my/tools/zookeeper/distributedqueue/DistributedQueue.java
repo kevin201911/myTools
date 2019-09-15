@@ -11,7 +11,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * @author wq105907
+ * @author wq
  * @date 2019/9/8
  */
 public class DistributedQueue<E> extends AbstractQueue<E> implements Queue<E> {

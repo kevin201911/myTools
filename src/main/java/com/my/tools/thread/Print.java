@@ -2,7 +2,7 @@ package com.my.tools.thread;
 
 
 /**
- * @author wq105907
+ * @author wq
  * @date 2018/11/5
  */
 public class Print {

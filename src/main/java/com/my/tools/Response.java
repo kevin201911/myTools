@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 /**
- * @author wq105907
+ * @author wq
  * @date 2019/5/20
  */
 public class Response {

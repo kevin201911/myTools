@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author wq105907
+ * @author wq
  * @date 2019/7/29
  */
 public class ConCurrentHashMapMain {

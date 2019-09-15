@@ -1,7 +1,7 @@
 package com.my.tools;
 
 /**
- * @author wq105907
+ * @author wq
  * @date 2018/11/5
  */
 public class StringAppendCompare {

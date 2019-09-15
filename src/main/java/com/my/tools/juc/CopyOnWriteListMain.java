@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * @author wq105907
+ * @author wq
  * @date 2019/7/28
  */
 public class CopyOnWriteListMain {

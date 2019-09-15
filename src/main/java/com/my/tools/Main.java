@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * @author wq105907
+ * @author wq
  * @date 2018/11/5
  */
 public class Main {
