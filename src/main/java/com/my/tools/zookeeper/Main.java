@@ -16,8 +16,8 @@ public class Main implements Watcher {
     private static final String NODE = "data";
     public static void main(String[] args) throws Exception {
         ZooKeeper zooKeeper = new ZooKeeper("localhost", 2181, null);
-        DistributedQueue queue = new DistributedQueue(zooKeeper, DIR, NODE, ZooDefs.Ids.OPEN_ACL_UNSAFE);
-        //queue.offer("test1111");
+        DistributedQueue<String> queue = new DistributedQueue<String>(zooKeeper, DIR, NODE, ZooDefs.Ids.OPEN_ACL_UNSAFE);
+        queue.offer("test1111");
         Object object = queue.poll();
 
         System.out.println(object);

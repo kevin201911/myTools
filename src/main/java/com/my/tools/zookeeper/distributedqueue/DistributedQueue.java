@@ -86,7 +86,7 @@ public class DistributedQueue<E> extends AbstractQueue<E> implements Queue<E> {
      * @return the boolean
      */
     @Override
-    public boolean offer(Object o) {
+    public boolean offer(E o) {
         String fullPath = dir.concat("/").concat(node);
         try {
             zooKeeper.create(fullPath, objectToBytes(o), acls, CreateMode.PERSISTENT_SEQUENTIAL);
