@@ -1,5 +1,6 @@
 package com.my.tools.zookeeper.distributedqueue;
 
+import com.my.tools.zookeeper.utils.ConversionUtil;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.ACL;
@@ -7,7 +8,6 @@ import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
 import java.util.*;
 
 /**
@@ -89,7 +89,7 @@ public class DistributedQueue<E> extends AbstractQueue<E> implements Queue<E> {
     public boolean offer(E o) {
         String fullPath = dir.concat("/").concat(node);
         try {
-            zooKeeper.create(fullPath, objectToBytes(o), acls, CreateMode.PERSISTENT_SEQUENTIAL);
+            zooKeeper.create(fullPath, ConversionUtil.objectToBytes(o), acls, CreateMode.PERSISTENT_SEQUENTIAL);
             return true;
         } catch (Exception e) {
             logger.error("[DistributedQueue#offer] error : " + e.toString(), e);
@@ -115,7 +115,7 @@ public class DistributedQueue<E> extends AbstractQueue<E> implements Queue<E> {
                 String fullPath = dir.concat("/").concat(child);
                 try {
                     byte[] bytes = zooKeeper.getData(fullPath, false, null);
-                    E data = (E) bytesToObject(bytes);
+                    E data = (E) ConversionUtil.bytesToObject(bytes);
                     zooKeeper.delete(fullPath, -1);
                     return data;
                 } catch (Exception e) {
@@ -148,7 +148,7 @@ public class DistributedQueue<E> extends AbstractQueue<E> implements Queue<E> {
                 String fullPath = dir.concat("/").concat(child);
                 try {
                     byte[] bytes = zooKeeper.getData(fullPath, false, null);
-                    E data = (E) bytesToObject(bytes);
+                    E data = (E) ConversionUtil.bytesToObject(bytes);
                     return data;
                 } catch (Exception e) {
                     logger.warn("[DistributedQueue#peek] warn : " + e.toString(), e);
@@ -162,38 +162,6 @@ public class DistributedQueue<E> extends AbstractQueue<E> implements Queue<E> {
         return null;
     }
 
-    private byte[] objectToBytes(Object obj) {
-        byte[] bytes = null;
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream(baos);
-            oos.writeObject(obj);
 
-            bytes = baos.toByteArray();
-
-            baos.close();
-            oos.close();
-        } catch (Exception e) {
-            logger.error("[DistributedQueue#objectToBytes] error : " + e.toString(), e);
-        }
-
-        return bytes;
-    }
-
-    private Object bytesToObject(byte[] bytes) {
-        Object object = null;
-        try {
-            ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-            ObjectInputStream ois = new ObjectInputStream(bais);
-            object = ois.readObject();
-
-            bais.close();
-            ois.close();
-        } catch (Exception e) {
-            logger.error("[DistributedQueue#bytesToObject] error : " + e.toString(), e);
-        }
-
-        return object;
-    }
 
 }

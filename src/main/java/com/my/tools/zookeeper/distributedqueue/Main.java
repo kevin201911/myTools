@@ -1,4 +1,4 @@
-package com.my.tools.zookeeper;
+package com.my.tools.zookeeper.distributedqueue;
 
 import com.my.tools.zookeeper.distributedqueue.DistributedQueue;
 import org.apache.zookeeper.WatchedEvent;
@@ -12,7 +12,7 @@ import org.apache.zookeeper.ZooKeeper;
  * @date 2019/9/8
  */
 public class Main implements Watcher {
-    private static final String DIR = "/distributed";
+    private static final String DIR = "/distributedqueue";
     private static final String NODE = "data";
     public static void main(String[] args) throws Exception {
         ZooKeeper zooKeeper = new ZooKeeper("localhost", 2181, null);
