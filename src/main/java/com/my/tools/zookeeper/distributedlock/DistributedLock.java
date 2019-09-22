@@ -102,6 +102,7 @@ public class DistributedLock implements Lock {
             }
             try {
                 zooKeeper.create(fullPath, null, acls, CreateMode.EPHEMERAL);
+                state++;
                 break;
             } catch (InterruptedException ie) {
                 logger.error("[DistributedLock#lockInterruptibly] error : " + ie.toString(), ie);
@@ -128,6 +129,7 @@ public class DistributedLock implements Lock {
 
         try {
             zooKeeper.create(fullPath, null, acls, CreateMode.EPHEMERAL);
+            state++;
             return true;
         } catch (Exception e) {
             logger.error("[DistributedLock#tryLock] error : " + e.toString(), e);
@@ -167,6 +169,7 @@ public class DistributedLock implements Lock {
             }
             try {
                 zooKeeper.create(fullPath, null, acls, CreateMode.EPHEMERAL);
+                state++;
                 return true;
             } catch (InterruptedException ie) {
                 logger.error("[DistributedLock#tryLock] error : " + ie.toString(), ie);
