@@ -46,7 +46,7 @@ public class DistributedLock implements Lock {
         this.dir = dir;
         this.node = node;
         this.acls = acls;
-        this.fullPath = dir.concat("/").concat(node);
+        this.fullPath = dir.concat("/").concat(this.node);
         init();
     }
 
