@@ -21,20 +21,28 @@ import java.util.concurrent.locks.Lock;
 public class DistributedFairLock implements Lock {
     private static Logger logger = LoggerFactory.getLogger(DistributedFairLock.class);
 
+    //ZooKeeper客户端，进行ZooKeeper操作
     private ZooKeeper zooKeeper;
 
+    //根节点名称
     private String dir;
 
+    //加锁节点
     private String node;
 
+    //ZooKeeper鉴权信息
     private List<ACL> acls;
 
+    //要加锁节点
     private String fullPath;
 
+    //加锁标识，为0时表示未获取到锁，每获取一次锁则加一，释放锁时减一。减到0时断开连接，删除临时节点。
     private volatile int state;
 
+    //当前锁创建的节点id
     private String id;
 
+    //通过CountDownLatch阻塞，直到监听上一节点被取消，再进行后续操作
     private CountDownLatch countDownLatch;
 
     /**
@@ -145,7 +153,6 @@ public class DistributedFairLock implements Lock {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -200,8 +207,9 @@ public class DistributedFairLock implements Lock {
         }
         if (state == 0 && zooKeeper != null) {
             try {
-                zooKeeper.close();
-            } catch (InterruptedException e) {
+                zooKeeper.delete(id, -1);
+                id = null;
+            } catch (Exception e) {
                 logger.error("[DistributedFairLock#unlock] error : " + e.toString(), e);
             }
         }

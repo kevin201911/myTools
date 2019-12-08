@@ -35,6 +35,7 @@ public class FairMain {
                 }
 
                 lock1.unlock();
+                System.out.println(lock1.tryLock());
                 System.out.println("thread1 unlocked");
             }
         });
@@ -52,6 +53,7 @@ public class FairMain {
 
                 System.out.println("thread2 begin");
                 lock2.lock();
+                System.out.println("thread2 locked");
                 try {
                     Thread.sleep(10000);
                 } catch (InterruptedException e) {
@@ -59,6 +61,8 @@ public class FairMain {
                 }
                 System.out.println("thread2 locked");
                 lock2.unlock();
+
+                System.out.println("thread2 unlocked");
             }
         });
 
@@ -75,13 +79,15 @@ public class FairMain {
 
                 System.out.println("thread3 begin");
                 lock2.lock();
+                System.out.println("thread3 locked");
                 try {
                     Thread.sleep(10000);
                 } catch (InterruptedException e) {
-                    System.out.println("thread3 InterruptedException");
+                    System.out.println("thread3 InterruptedException" + e);
                 }
-                System.out.println("thread3 locked");
                 lock2.unlock();
+
+                System.out.println("thread3 unlocked");
             }
         });
 
